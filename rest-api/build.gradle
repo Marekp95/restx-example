@@ -1,5 +1,6 @@
 dependencies {
     implementation project(':model')
+    implementation project(':storage')
 
     implementation "io.restx:restx-core:$restxVersion"
     implementation "io.restx:restx-server-simple:$restxVersion"
