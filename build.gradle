@@ -8,11 +8,17 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'groovy'
 }
 
 dependencies {
-    testImplementation "org.codehaus.groovy:groovy:2.5.7"
-    testImplementation 'org.spockframework:spock-core:1.3-groovy-2.5'
+    compile "com.google.guava:guava:$guavaVersion"
 }

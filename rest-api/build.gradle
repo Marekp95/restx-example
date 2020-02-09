@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':model')
+
+    implementation "io.restx:restx-core:$restxVersion"
+    implementation "io.restx:restx-server-simple:$restxVersion"
+
+    annotationProcessor "io.restx:restx-core-annotation-processor:$restxVersion"
+}

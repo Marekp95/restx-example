@@ -10,6 +10,10 @@ public class Transaction {
     private final Account recipient;
     private final BigDecimal amount;
 
+    public Transaction(Account sender, Account recipient, BigDecimal amount) {
+        this(Instant.now(), sender, recipient, amount);
+    }
+
     public Transaction(Instant timestamp, Account sender, Account recipient, BigDecimal amount) {
         this.timestamp = timestamp;
         this.sender = sender;
