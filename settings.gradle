@@ -1,0 +1,13 @@
+rootProject.name = 'rest'
+
+def modules = [
+        'model',
+]
+
+modules.each {
+    include ":$it"
+}
+
+modules.each {
+    project(":$it").projectDir = "$rootDir/$it" as File
+}

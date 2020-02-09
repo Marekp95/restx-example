@@ -1,0 +1,16 @@
+plugins {
+    id 'groovy'
+    id 'java'
+}
+
+group 'com.github.marekp95'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+}
