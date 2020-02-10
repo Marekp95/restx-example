@@ -11,7 +11,6 @@ public class Server {
         final int port = Integer.parseInt(Optional.ofNullable(System.getenv("PORT")).orElse("8080"));
         final WebServer server = SimpleWebServer.builder()
                 .setRouterPath("/api")
-                .setAppBase("./")
                 .setPort(port)
                 .build();
 
