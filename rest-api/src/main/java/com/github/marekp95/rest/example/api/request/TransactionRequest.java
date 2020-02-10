@@ -5,7 +5,7 @@ import com.google.common.base.Objects;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-public class TransactionRequest {
+public class TransactionRequest implements Request {
 
     private UUID senderId;
     private UUID recipientId;
@@ -21,6 +21,13 @@ public class TransactionRequest {
 
     public BigDecimal getAmount() {
         return amount;
+    }
+
+    @Override
+    public boolean isValid() {
+        return senderId != null
+                && recipientId != null
+                && amount != null && amount.signum() >= 0 && amount.scale() <= 2;
     }
 
     @Override

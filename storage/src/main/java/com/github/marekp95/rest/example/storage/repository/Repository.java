@@ -14,6 +14,10 @@ public class Repository<T> {
         entryMap.put(id, data);
     }
 
+    public void remove(UUID id) {
+        entryMap.remove(id);
+    }
+
     public Optional<T> find(UUID id) {
         return Optional.ofNullable(entryMap.get(id));
     }
