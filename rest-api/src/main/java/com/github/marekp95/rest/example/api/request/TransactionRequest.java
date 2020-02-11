@@ -11,6 +11,15 @@ public class TransactionRequest implements Request {
     private UUID recipientId;
     private BigDecimal amount;
 
+    public TransactionRequest() {
+    }
+
+    public TransactionRequest(UUID senderId, UUID recipientId, BigDecimal amount) {
+        this.senderId = senderId;
+        this.recipientId = recipientId;
+        this.amount = amount;
+    }
+
     public UUID getSenderId() {
         return senderId;
     }
