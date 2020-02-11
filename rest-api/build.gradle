@@ -6,4 +6,8 @@ dependencies {
     implementation "io.restx:restx-server-simple:$restxVersion"
 
     annotationProcessor "io.restx:restx-core-annotation-processor:$restxVersion"
+
+    testImplementation "org.spockframework:spock-core:$spockVersion"
+    testImplementation "cglib:cglib-nodep:$cglibVersion"
+    testImplementation "org.objenesis:objenesis:$objenesisVersion"
 }

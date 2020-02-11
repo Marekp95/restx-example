@@ -11,6 +11,15 @@ public class AccountRequest implements Request {
     private String lastName;
     private BigDecimal initialBalance;
 
+    public AccountRequest() {
+    }
+
+    public AccountRequest(String firstName, String lastName, BigDecimal initialBalance) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.initialBalance = initialBalance;
+    }
+
     public String getFirstName() {
         return firstName;
     }
