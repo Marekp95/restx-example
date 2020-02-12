@@ -35,7 +35,7 @@ public class TransactionService {
 
     public void processTransaction(Account sender, Account recipient, BigDecimal amount) {
         if (!hasEnoughMoney(sender, amount)) {
-            throw errors.on(Rules.NotFound.class).raise();
+            throw errors.on(Rules.SenderHasNotEnoughMoney.class).raise();
         }
         sender.takeMoney(amount);
         recipient.addMoney(amount);
@@ -47,8 +47,8 @@ public class TransactionService {
     }
 
     public static class Rules {
-        @ErrorCode(code = "", description = "", status = HttpStatus.I_AM_A_TEAPOT)
-        public static class NotFound {
+        @ErrorCode(code = "SHNEM", description = "Sender has not enough money.", status = HttpStatus.BAD_GATEWAY)
+        public static class SenderHasNotEnoughMoney {
         }
     }
 }

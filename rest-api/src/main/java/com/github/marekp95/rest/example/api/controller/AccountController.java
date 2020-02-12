@@ -34,7 +34,7 @@ public class AccountController {
     // We intent this method to be invoked with some authority, such as, e.g., an authorized bank employee.
     public void createAccount(AccountRequest accountRequest) {
         if (!accountRequest.isValid()) {
-            throw errors.on(Rules.NotFound.class).raise();
+            throw errors.on(Rules.UnableToCreateAccount.class).raise();
         }
         accountRepository.insert(new Account(accountRequest.getFirstName(), accountRequest.getLastName(), accountRequest.getInitialBalance()));
     }
@@ -48,7 +48,7 @@ public class AccountController {
     @GET("/{id}")
     @PermitAll
     public Account getAccountData(@Param(value = "id", kind = Param.Kind.PATH) UUID id) {
-        return accountRepository.find(id).orElseThrow(() -> errors.on(Rules.NotFound.class).raise());
+        return accountRepository.find(id).orElseThrow(() -> errors.on(Rules.AccountNotFound.class).raise());
     }
 
     @DELETE("/{id}")
@@ -58,8 +58,12 @@ public class AccountController {
     }
 
     private static class Rules {
-        @ErrorCode(code = "", description = "", status = HttpStatus.I_AM_A_TEAPOT)
-        public static class NotFound {
+        @ErrorCode(code = "ANF", description = "Account not found.", status = HttpStatus.BAD_REQUEST)
+        public static class AccountNotFound {
+        }
+
+        @ErrorCode(code = "UTCA", description = "Unable to create account - invalid parameters.", status = HttpStatus.BAD_REQUEST)
+        public static class UnableToCreateAccount {
         }
     }
 }

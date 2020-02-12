@@ -39,12 +39,12 @@ public class TransactionController {
     @PermitAll
     public void orderTransaction(TransactionRequest transactionRequest) {
         if (!transactionRequest.isValid()) {
-            throw errors.on(Rules.NotFound.class).raise();
+            throw errors.on(Rules.UnableToOrderTransaction.class).raise();
         }
         final Account sender = accountRepository.find(transactionRequest.getSenderId())
-                .orElseThrow(() -> errors.on(Rules.NotFound.class).raise());
+                .orElseThrow(() -> errors.on(Rules.AccountNotFound.class).raise());
         final Account recipient = accountRepository.find(transactionRequest.getRecipientId())
-                .orElseThrow(() -> errors.on(Rules.NotFound.class).raise());
+                .orElseThrow(() -> errors.on(Rules.AccountNotFound.class).raise());
         transactionService.processTransaction(sender, recipient, transactionRequest.getAmount());
     }
 
@@ -57,20 +57,28 @@ public class TransactionController {
     @GET("/{id}")
     @PermitAll
     public Transaction getTransactionData(@Param(value = "id", kind = Param.Kind.PATH) UUID id) {
-        return transactionRepository.find(id).orElseThrow(() -> errors.on(Rules.NotFound.class).raise());
+        return transactionRepository.find(id).orElseThrow(() -> errors.on(Rules.TransactionNotFound.class).raise());
     }
 
     @GET("/account/{id}")
     @PermitAll
     public Collection<Transaction> getAccountRelatedTransactions(@Param(value = "id", kind = Param.Kind.PATH) UUID id) {
         final Account account = accountRepository.find(id)
-                .orElseThrow(() -> errors.on(Rules.NotFound.class).raise());
+                .orElseThrow(() -> errors.on(Rules.AccountNotFound.class).raise());
         return transactionService.findAllRelatedTransactions(account);
     }
 
     public static class Rules {
-        @ErrorCode(code = "", description = "", status = HttpStatus.I_AM_A_TEAPOT)
-        public static class NotFound {
+        @ErrorCode(code = "ANF", description = "Account not found.", status = HttpStatus.BAD_REQUEST)
+        public static class AccountNotFound {
+        }
+
+        @ErrorCode(code = "TNF", description = "Transaction not found.", status = HttpStatus.BAD_REQUEST)
+        public static class TransactionNotFound {
+        }
+
+        @ErrorCode(code = "UTOT", description = "Unable to order transaction - invalid parameters.", status = HttpStatus.BAD_REQUEST)
+        public static class UnableToOrderTransaction {
         }
     }
 }
