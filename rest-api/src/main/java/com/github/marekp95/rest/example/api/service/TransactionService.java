@@ -25,8 +25,12 @@ public class TransactionService {
 
     public Collection<Transaction> findAllRelatedTransactions(Account account) {
         return transactionRepository.findAll().stream()
-                .filter(transaction -> transaction.getSender().equals(account) || transaction.getRecipient().equals(account))
+                .filter(transaction -> isInvolvedInTransaction(account, transaction))
                 .collect(Collectors.toList());
+    }
+
+    private boolean isInvolvedInTransaction(Account account, Transaction transaction) {
+        return transaction.getSender().equals(account) || transaction.getRecipient().equals(account);
     }
 
     public void processTransaction(Account sender, Account recipient, BigDecimal amount) {

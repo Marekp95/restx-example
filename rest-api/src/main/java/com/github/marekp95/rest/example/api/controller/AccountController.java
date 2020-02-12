@@ -36,7 +36,7 @@ public class AccountController {
         if (!accountRequest.isValid()) {
             throw errors.on(Rules.NotFound.class).raise();
         }
-        accountRepository.insert(new Account(UUID.randomUUID(), accountRequest.getFirstName(), accountRequest.getLastName(), accountRequest.getInitialBalance()));
+        accountRepository.insert(new Account(accountRequest.getFirstName(), accountRequest.getLastName(), accountRequest.getInitialBalance()));
     }
 
     @GET("")

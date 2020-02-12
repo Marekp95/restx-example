@@ -12,7 +12,11 @@ public class Account {
     private BigDecimal balance;
 
     public Account(String firstName, String lastName) {
-        this(UUID.randomUUID(), firstName, lastName, BigDecimal.ZERO);
+        this(firstName, lastName, BigDecimal.ZERO);
+    }
+
+    public Account(String firstName, String lastName, BigDecimal amount) {
+        this(UUID.randomUUID(), firstName, lastName, amount);
     }
 
     public Account(UUID accountId, String firstName, String lastName, BigDecimal balance) {
