@@ -4,6 +4,7 @@ dependencies {
 
     implementation "io.restx:restx-core:$restxVersion"
     implementation "io.restx:restx-server-simple:$restxVersion"
+    implementation "info.picocli:picocli:$picocliVersion"
 
     annotationProcessor "io.restx:restx-core-annotation-processor:$restxVersion"
 
