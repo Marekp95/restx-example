@@ -20,5 +20,5 @@ subprojects {
 }
 
 dependencies {
-    compile "com.google.guava:guava:$guavaVersion"
+    implementation "com.google.guava:guava:$guavaVersion"
 }

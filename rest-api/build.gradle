@@ -5,6 +5,8 @@ dependencies {
     implementation "io.restx:restx-core:$restxVersion"
     implementation "io.restx:restx-server-simple:$restxVersion"
     implementation "info.picocli:picocli:$picocliVersion"
+    implementation "org.slf4j:slf4j-api:$slf4jVersion"
+    implementation "org.slf4j:slf4j-simple:$slf4jVersion"
 
     annotationProcessor "io.restx:restx-core-annotation-processor:$restxVersion"
 
