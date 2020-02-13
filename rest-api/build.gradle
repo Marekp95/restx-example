@@ -12,3 +12,18 @@ dependencies {
     testImplementation "cglib:cglib-nodep:$cglibVersion"
     testImplementation "org.objenesis:objenesis:$objenesisVersion"
 }
+
+configurations.implementation.setCanBeResolved(true)
+
+task fatJar(type: Jar, dependsOn: build) {
+    with jar
+    archiveClassifier = 'all'
+    manifest {
+        attributes 'Main-Class': 'com.github.marekp95.rest.example.api.Server'
+    }
+    doFirst {
+        from {
+            configurations.flatten().collect { it.isDirectory() ? it : zipTree(it) }
+        }
+    }
+}
